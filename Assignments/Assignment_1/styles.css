@@ -6,7 +6,7 @@ box-sizing: border-box;
 body {
 font-family: 'Arial', sans-serif;
 background-color: #f4f4f4;
-line-height: 1.8; /* Increased line height for more vertical space */
+line-height: 1.8;
 }
 
 .cv-container {
@@ -15,10 +15,9 @@ max-width: 1200px;
 margin: 20px auto;
 }
 
-/* Sidebar (30%) */
 .sidebar {
 width: 30%;
-background-color: #f5f5dc; /* Beige background */
+background-color: #f5f5dc;
 padding: 30px;
 text-align: center;
 color: #333;
@@ -28,17 +27,17 @@ height: fit-content;
 }
 
 .profile-pic {
-width: 140px; /* Slightly larger image */
+width: 140px;
 height: 140px;
 border-radius: 50%;
-border: 3px solid #8b4513; /* Saddle brown border */
+border: 3px solid #8b4513;
 margin-bottom: 20px;
 object-fit: cover;
 }
 
 .sidebar h1 {
-font-size: 2em; /* Increased font size */
-color: #8b4513; /* Saddle brown for the name */
+font-size: 2em;
+color: #8b4513;
 margin-bottom: 10px;
 }
 
@@ -70,10 +69,10 @@ text-decoration: none;
 text-decoration: underline;
 }
 
-/* Main Content (70%) */
+
 .main-content {
 width: 70%;
-background-color: #faf9f6; /* Off-white background */
+background-color: #faf9f6;
 padding: 40px;
 }
 
@@ -82,8 +81,8 @@ margin-bottom: 40px;
 }
 
 .main-content h2 {
-font-size: 1.8em; /* Increased font size */
-color: #2c3e50; /* Dark blue for headings */
+font-size: 1.8em;
+color: #2c3e50;
 margin-bottom: 20px;
 position: relative;
 display: inline-block;
@@ -99,7 +98,6 @@ bottom: -5px;
 left: 0;
 }
 
-/* Beautiful Bullets */
 .main-content ul {
 list-style: none;
 padding-left: 0;
@@ -109,23 +107,23 @@ padding-left: 0;
 position: relative;
 padding-left: 35px;
 margin: 15px 0;
-font-size: 1.1em; /* Increased font size */
+font-size: 1.1em; 
 color: #34495e;
 }
 
 .main-content li::before {
-content: '✦'; /* Custom bullet (a star-like symbol) */
+content: '✦';
 position: absolute;
 left: 0;
-color: #ff6f61; /* Coral color for bullets */
+color: #ff6f61;
 font-size: 1.3em;
 }
 
-/* Sticky Headings */
+
 .main-content h2 {
 position: sticky;
 top: 20px;
-background-color: #faf9f6; /* Matches the off-white background */
+background-color: #faf9f6;
 padding: 5px 0;
 z-index: 1;
 }
