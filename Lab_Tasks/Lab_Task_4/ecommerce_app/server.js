@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt'); 
 const User = require('./models/User'); 
 const { body, validationResult } = require('express-validator');
+const Product = require('./models/product'); 
+const Order = require('./models/order');
 
 const app = express();
 
@@ -20,10 +22,29 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+
 mongoose.connect('mongodb://localhost/ecommerce', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err));
 
+const isAdmin = async (req, res, next) => {
+    if (!req.session.user || !req.session.user.isAdmin) {
+        return res.status(403).send('Access denied. Admin only.');
+    }
+    next();
+};
+
+(async () => {
+    const adminEmail = 'adminbro@gmail.com';
+    const adminPassword = 'adminbropass';
+    const admin = await User.findOne({ email: adminEmail });
+    if (!admin) {
+        const hashedPassword = await bcrypt.hash(adminPassword, 10);
+        const newAdmin = new User({ email: adminEmail, password: hashedPassword, isAdmin: true });
+        await newAdmin.save();
+        console.log('Admin user created');
+    }
+})();
 
 app.get('/', (req, res) => {
     res.render('index', { title: 'Home', user: req.session.user });
@@ -66,7 +87,7 @@ app.post('/login', async (req, res) => {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
         if (user && await bcrypt.compare(password, user.password)) {
-            req.session.user = { id: user._id, email: user.email };
+            req.session.user = { id: user._id, email: user.email, isAdmin: user.isAdmin };
             res.redirect('/');
         } else {
             res.status(401).send('Invalid email or password');
@@ -89,5 +110,46 @@ app.get('/logout', (req, res) => {
     res.redirect('/login');
 });
 
-const PORT = process.env.PORT || 3000;
+app.get('/admin/products', isAdmin, async (req, res) => {
+    const products = await Product.find();
+    res.render('admin/products', { title: 'Admin Products', products });
+});
+
+app.get('/admin', isAdmin, (req, res) => {
+    res.render('admin/dashboard', { title: 'Admin Dashboard' });
+});
+
+app.get('/admin/products/add', isAdmin, (req, res) => {
+    res.render('admin/add-product', { title: 'Add Product' });
+});
+
+app.post('/admin/products/add', isAdmin, async (req, res) => {
+    const { name, price, description, imageUrl } = req.body;
+    const product = new Product({ name, price, description, imageUrl });
+    await product.save();
+    res.redirect('/admin/products');
+});
+
+app.get('/admin/products/edit/:id', isAdmin, async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    res.render('admin/edit-product', { title: 'Edit Product', product });
+});
+
+app.get('/admin/orders', isAdmin, async (req, res) => {
+    const orders = await Order.find().populate('userId').populate('items.productId');
+    res.render('admin/orders', { title: 'Admin Orders', orders });
+});
+
+app.post('/admin/products/edit/:id', isAdmin, async (req, res) => {
+    const { name, price, description, imageUrl } = req.body;
+    await Product.findByIdAndUpdate(req.params.id, { name, price, description, imageUrl });
+    res.redirect('/admin/products');
+});
+
+app.get('/admin/products/delete/:id', isAdmin, async (req, res) => {
+    await Product.findByIdAndDelete(req.params.id);
+    res.redirect('/admin/products');
+});
+
+const PORT = process.env.PORT || 3000; 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
