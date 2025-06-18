@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="/images/logo.jpg" alt="Charlotte Olympia Logo" class="logo" style="height: 40px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">SHOP</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">CHARLOTTE'S WEB</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="/login">LOGIN</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cart">CART (0)</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/profile">PROFILE</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-5">
+        <%- body %>
+    </main>
+    <footer class="footer bg-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <h5>CHARLOTTE OLYMPIA</h5>
+                    <p>A collection of shoes, bags, and other fascinations</p>
+                </div>
+                <div class="col-md-2">
+                    <h5>FOLLOW</h5>
+                    <a href="#" class="text-decoration-none text-dark">Instagram</a>
+                </div>
+                <div class="col-md-2">
+                    <h5>GET IN TOUCH</h5>
+                    <a href="#" class="text-decoration-none text-dark">Contact</a>
+                </div>
+                <div class="col-md-2">
+                    <h5>LEGAL</h5>
+                    <a href="#" class="text-decoration-none text-dark">Terms & Conditions</a>
+                    <a href="#" class="text-decoration-none text-dark">Shipping & Returns</a>
+                    <a href="#" class="text-decoration-none text-dark">Return Form</a>
+                    <a href="#" class="text-decoration-none text-dark">Privacy Policy</a>
+                </div>
+                <div class="col-md-4">
+                    <h5>SIGN UP</h5>
+                    <p>Get caught in Charlotte's web</p>
+                    <input type="email" class="form-control mb-2" placeholder="Enter your email address">
+                    <button class="btn btn-dark w-100">SUBSCRIBE</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
