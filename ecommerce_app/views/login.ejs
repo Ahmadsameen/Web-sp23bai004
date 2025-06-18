@@ -12,3 +12,10 @@
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
 </div>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === '1') {
+        alert('Registration completed successfully!');
+        window.history.replaceState({}, document.title, '/login');
+    }
+</script>
