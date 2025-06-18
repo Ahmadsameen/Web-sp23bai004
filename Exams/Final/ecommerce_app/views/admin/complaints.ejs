@@ -1,0 +1,21 @@
+<div class="container mt-5">
+    <h2>Admin Complaints</h2>
+    <% if (!complaints.length) { %>
+        <p>No complaints have been submitted yet.</p>
+    <% } else { %>
+        <table class="table">
+            <thead><tr><th>User</th><th>Order ID</th><th>Message</th><th>Timestamp</th></tr></thead>
+            <tbody>
+                <% complaints.forEach(complaint => { %>
+                    <tr>
+                        <td><%= complaint.userId.email %></td>
+                        <td><%= complaint.orderId._id %></td>
+                        <td><%= complaint.message %></td>
+                        <td><%= new Date(complaint.timestamp).toLocaleString() %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } %>
+    <a href="/admin" class="btn btn-secondary mt-3">Back to Dashboard</a>
+</div>

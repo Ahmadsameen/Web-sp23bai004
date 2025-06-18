@@ -1,0 +1,11 @@
+<div class="container mt-5">
+    <h2>Contact Us</h2>
+    <% if (typeof message !== 'undefined' && message === 'success') { %>
+        <div class="alert alert-success">Complaint submitted successfully!</div>
+    <% } %>
+    <form action="/contact" method="POST">
+        <div class="mb-3"><input type="text" name="orderId" class="form-control" placeholder="Order ID" required></div>
+        <div class="mb-3"><textarea name="message" class="form-control" placeholder="Your complaint" required></textarea></div>
+        <button type="submit" class="btn btn-primary">Submit Complaint</button>
+    </form>
+</div>

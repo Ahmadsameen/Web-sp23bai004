@@ -1,0 +1,21 @@
+<div class="container mt-5">
+    <h2>Register</h2>
+    <form action="/register" method="POST">
+        <div class="mb-3">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('error') === 'duplicate') {
+        alert('Email already registered. Please use a different email.');
+        window.history.replaceState({}, document.title, '/register');
+    }
+</script>
